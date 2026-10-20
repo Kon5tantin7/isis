@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1410" height="1370" viewBox="0 0 1410 1370">
+<rect width="1410" height="1370" fill="white"/>
+<g font-family="DejaVu Sans,Arial,sans-serif" fill="#182b40">
+<text x="60" y="48" font-size="28" font-weight="bold">Прокат автомобилей — ER-диаграмма</text>
+<text x="60" y="78" font-size="16">Логическая модель данных по предоставленному BPMN • кратности в нотации min..max</text>
+<polyline points="390,185 540,185" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="416" y="173" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="506" y="173" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..N</text>
+<polyline points="1020,250 870,250" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="986" y="238" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="896" y="238" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..N</text>
+<polyline points="225,266 225,500" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="243" y="294" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="243" y="482" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..N</text>
+<polyline points="705,370 705,500" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="723" y="398" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="723" y="482" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..1</text>
+<polyline points="1020,575 870,575" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="986" y="563" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="896" y="563" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..N</text>
+<polyline points="705,734 705,900" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="723" y="762" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="723" y="882" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..2</text>
+<polyline points="1100,656 1100,810 800,810 800,900" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="1118" y="684" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="818" y="882" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..N</text>
+<polyline points="1230,656 1230,900" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="1248" y="684" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..1</text>
+<text x="1248" y="882" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..N</text>
+<polyline points="870,695 950,695 950,980 1020,980" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="896" y="683" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="986" y="968" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..N</text>
+<polyline points="540,1020 390,1020" fill="none" stroke="#526779" stroke-width="2"/>
+<text x="506" y="1008" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">1</text>
+<text x="416" y="1008" font-size="17" font-weight="bold" paint-order="stroke" stroke="white" stroke-width="5">0..N</text>
+<rect x="60" y="110" width="330" height="156" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M66,110 H384 Q390,110 390,116 V150 H60 V116 Q60,110 66,110" fill="#e9eff5"/>
+<text x="74" y="136" font-size="17" font-weight="bold">КЛИЕНТ</text>
+<text x="74" y="174" font-size="15">PK  id_клиента</text>
+<text x="74" y="200" font-size="15">ФИО</text>
+<text x="74" y="226" font-size="15">Телефон</text>
+<text x="74" y="252" font-size="15">Email</text>
+<rect x="540" y="110" width="330" height="260" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M546,110 H864 Q870,110 870,116 V150 H540 V116 Q540,110 546,110" fill="#e9eff5"/>
+<text x="554" y="136" font-size="17" font-weight="bold">ЗАЯВКА / БРОНИРОВАНИЕ</text>
+<text x="554" y="174" font-size="15">PK  id_заявки</text>
+<text x="554" y="200" font-size="15">FK  id_клиента</text>
+<text x="554" y="226" font-size="15">FK  id_автомобиля</text>
+<text x="554" y="252" font-size="15">Канал: офис / сайт / приложение</text>
+<text x="554" y="278" font-size="15">Начало и конец проката</text>
+<text x="554" y="304" font-size="15">Расчётная стоимость</text>
+<text x="554" y="330" font-size="15">Статус; причина отказа</text>
+<text x="554" y="356" font-size="15">Результат проверки допуска</text>
+<rect x="1020" y="110" width="330" height="182" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M1026,110 H1344 Q1350,110 1350,116 V150 H1020 V116 Q1020,110 1026,110" fill="#e9eff5"/>
+<text x="1034" y="136" font-size="17" font-weight="bold">АВТОМОБИЛЬ</text>
+<text x="1034" y="174" font-size="15">PK  id_автомобиля</text>
+<text x="1034" y="200" font-size="15">UK  VIN; госномер</text>
+<text x="1034" y="226" font-size="15">Марка; модель</text>
+<text x="1034" y="252" font-size="15">Тариф за сутки</text>
+<text x="1034" y="278" font-size="15">Статус автомобиля</text>
+<rect x="60" y="500" width="330" height="182" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M66,500 H384 Q390,500 390,506 V540 H60 V506 Q60,500 66,500" fill="#e9eff5"/>
+<text x="74" y="526" font-size="17" font-weight="bold">ДОКУМЕНТ КЛИЕНТА</text>
+<text x="74" y="564" font-size="15">PK  id_документа</text>
+<text x="74" y="590" font-size="15">FK  id_клиента</text>
+<text x="74" y="616" font-size="15">Тип: паспорт / водительское</text>
+<text x="74" y="642" font-size="15">Серия; номер</text>
+<text x="74" y="668" font-size="15">Дата выдачи; срок действия</text>
+<rect x="540" y="500" width="330" height="234" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M546,500 H864 Q870,500 870,506 V540 H540 V506 Q540,500 546,500" fill="#e9eff5"/>
+<text x="554" y="526" font-size="17" font-weight="bold">ДОГОВОР ПРОКАТА</text>
+<text x="554" y="564" font-size="15">PK  id_договора</text>
+<text x="554" y="590" font-size="15">FK, UK  id_заявки</text>
+<text x="554" y="616" font-size="15">FK  id_менеджера → Сотрудник</text>
+<text x="554" y="642" font-size="15">Номер; дата подписания</text>
+<text x="554" y="668" font-size="15">Согласованная стоимость</text>
+<text x="554" y="694" font-size="15">Сумма залога; условия доплат</text>
+<text x="554" y="720" font-size="15">Статус; дата закрытия</text>
+<rect x="1020" y="500" width="330" height="156" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M1026,500 H1344 Q1350,500 1350,506 V540 H1020 V506 Q1020,500 1026,500" fill="#e9eff5"/>
+<text x="1034" y="526" font-size="17" font-weight="bold">СОТРУДНИК</text>
+<text x="1034" y="564" font-size="15">PK  id_сотрудника</text>
+<text x="1034" y="590" font-size="15">ФИО</text>
+<text x="1034" y="616" font-size="15">Роль: менеджер / кассир /</text>
+<text x="1034" y="642" font-size="15">сотрудник выдачи и приёма</text>
+<rect x="60" y="900" width="330" height="182" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M66,900 H384 Q390,900 390,906 V940 H60 V906 Q60,900 66,900" fill="#e9eff5"/>
+<text x="74" y="926" font-size="17" font-weight="bold">ДОПЛАТА</text>
+<text x="74" y="964" font-size="15">PK  id_доплаты</text>
+<text x="74" y="990" font-size="15">FK  id_акта → Акт возврата</text>
+<text x="74" y="1016" font-size="15">Основание: топливо / срок / ущерб</text>
+<text x="74" y="1042" font-size="15">Описание</text>
+<text x="74" y="1068" font-size="15">Сумма</text>
+<rect x="540" y="900" width="330" height="234" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M546,900 H864 Q870,900 870,906 V940 H540 V906 Q540,900 546,900" fill="#e9eff5"/>
+<text x="554" y="926" font-size="17" font-weight="bold">АКТ ВЫДАЧИ / ВОЗВРАТА</text>
+<text x="554" y="964" font-size="15">PK  id_акта</text>
+<text x="554" y="990" font-size="15">FK  id_договора</text>
+<text x="554" y="1016" font-size="15">FK  id_сотрудника</text>
+<text x="554" y="1042" font-size="15">Тип: выдача / возврат</text>
+<text x="554" y="1068" font-size="15">Дата и время; пробег</text>
+<text x="554" y="1094" font-size="15">Уровень топлива; состояние</text>
+<text x="554" y="1120" font-size="15">UK  (id_договора, тип)</text>
+<rect x="1020" y="900" width="330" height="234" rx="6" fill="white" stroke="#526779" stroke-width="1.6"/>
+<path d="M1026,900 H1344 Q1350,900 1350,906 V940 H1020 V906 Q1020,900 1026,900" fill="#e9eff5"/>
+<text x="1034" y="926" font-size="17" font-weight="bold">ПЛАТЁЖНАЯ ОПЕРАЦИЯ</text>
+<text x="1034" y="964" font-size="15">PK  id_операции</text>
+<text x="1034" y="990" font-size="15">FK  id_договора</text>
+<text x="1034" y="1016" font-size="15">FK? id_кассира → Сотрудник</text>
+<text x="1034" y="1042" font-size="15">Тип: аренда / залог / доплата /</text>
+<text x="1034" y="1068" font-size="15">возврат залога</text>
+<text x="1034" y="1094" font-size="15">Сумма; дата; статус</text>
+<text x="1034" y="1120" font-size="15">Способ: онлайн / в офисе</text>
+<text x="60" y="1204" font-size="15">PK — первичный ключ; FK — внешний ключ; UK — уникальность; ? — допускается NULL.</text>
+<text x="60" y="1230" font-size="15">1 — ровно один; 0..1 — не более одного; 0..N — любое количество; 0..2 — до двух актов.</text>
+<text x="60" y="1256" font-size="15">У одного договора не более одного акта каждого типа. Доплаты относятся только к акту возврата.</text>
+<text x="60" y="1282" font-size="15">Клиент и автомобиль договора определяются через заявку. Онлайн-платёж может не иметь кассира.</text>
+<text x="60" y="1308" font-size="15">Периоды подтверждённых бронирований одного автомобиля не должны пересекаться.</text>
+<text x="60" y="1334" font-size="15">Атрибуты и ограничения — проектные решения на основе BPMN; отдельная сущность «сайт» не требуется.</text>
+</g></svg>

@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_CarRental" targetNamespace="https://bpmn.io/schema/bpmn" exporter="bpmn-js">
+  <bpmn:collaboration id="Collaboration">
+    <bpmn:participant id="Pool" name="Прокат автомобилей — офис, сайт и мобильное приложение" processRef="Process" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process" isExecutable="false">
+    <bpmn:laneSet id="Lanes">
+      <bpmn:lane id="Online" name="Информационная система (сайт / приложение)">
+        <bpmn:flowNodeRef>OnlineStart</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Register</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Quote</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Notify</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Manager" name="Менеджер">
+        <bpmn:flowNodeRef>Start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Request</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Docs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Valid</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Stock</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Available</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Contract</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Reject</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Rejected</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Close</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Cashier" name="Кассир">
+        <bpmn:flowNodeRef>Payment</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Charge</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Merge</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Settle</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Technician" name="Сотрудник выдачи и приёма">
+        <bpmn:flowNodeRef>Issue</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Return</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Inspect</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Extra</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start" name="Клиент обратился в офис">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Request" name="Уточнить автомобиль и сроки проката">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Docs" name="Проверить документы и условия допуска">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:incoming>Online_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Valid" name="Клиент допущен?">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Stock" name="Проверить наличие автомобиля на выбранные даты">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Available" name="Автомобиль доступен?">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Contract" name="Одобрить заявку и забронировать автомобиль">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+      <bpmn:outgoing>Online_4</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Reject" name="Сообщить причину отказа в офисе или онлайн">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+      <bpmn:outgoing>Flow_9</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Rejected" name="Прокат не оформлен">
+      <bpmn:incoming>Flow_9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="Payment" name="Подтвердить получение оплаты и залога (онлайн или в офисе)">
+      <bpmn:incoming>Flow_10</bpmn:incoming>
+      <bpmn:outgoing>Flow_11</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Issue" name="Сверить оригиналы, подписать договор и выдать авто по акту">
+      <bpmn:incoming>Flow_11</bpmn:incoming>
+      <bpmn:outgoing>Flow_12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Return" name="Принять возвращённый автомобиль">
+      <bpmn:incoming>Flow_12</bpmn:incoming>
+      <bpmn:outgoing>Flow_13</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Inspect" name="Проверить состояние, топливо и срок возврата">
+      <bpmn:incoming>Flow_13</bpmn:incoming>
+      <bpmn:outgoing>Flow_14</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Extra" name="Нужна доплата?">
+      <bpmn:incoming>Flow_14</bpmn:incoming>
+      <bpmn:outgoing>Flow_15</bpmn:outgoing>
+      <bpmn:outgoing>Flow_17</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Charge" name="Рассчитать доплату по условиям договора">
+      <bpmn:incoming>Flow_15</bpmn:incoming>
+      <bpmn:outgoing>Flow_16</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Merge" name="">
+      <bpmn:incoming>Flow_16</bpmn:incoming>
+      <bpmn:incoming>Flow_17</bpmn:incoming>
+      <bpmn:outgoing>Flow_18</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Settle" name="Выполнить окончательный расчёт и вернуть остаток залога">
+      <bpmn:incoming>Flow_18</bpmn:incoming>
+      <bpmn:outgoing>Flow_19</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Close" name="Закрыть договор и обновить статус автомобиля">
+      <bpmn:incoming>Flow_19</bpmn:incoming>
+      <bpmn:outgoing>Flow_20</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End" name="Прокат завершён">
+      <bpmn:incoming>Flow_20</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start" targetRef="Request" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Request" targetRef="Docs" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Docs" targetRef="Valid" />
+    <bpmn:sequenceFlow id="Flow_4" name="Да" sourceRef="Valid" targetRef="Stock" />
+    <bpmn:sequenceFlow id="Flow_5" name="Нет" sourceRef="Valid" targetRef="Reject" />
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="Stock" targetRef="Available" />
+    <bpmn:sequenceFlow id="Flow_7" name="Да" sourceRef="Available" targetRef="Contract" />
+    <bpmn:sequenceFlow id="Flow_8" name="Нет" sourceRef="Available" targetRef="Reject" />
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Reject" targetRef="Rejected" />
+    <bpmn:sequenceFlow id="Flow_10" sourceRef="Notify" targetRef="Payment" />
+    <bpmn:sequenceFlow id="Flow_11" sourceRef="Payment" targetRef="Issue" />
+    <bpmn:sequenceFlow id="Flow_12" sourceRef="Issue" targetRef="Return" />
+    <bpmn:sequenceFlow id="Flow_13" sourceRef="Return" targetRef="Inspect" />
+    <bpmn:sequenceFlow id="Flow_14" sourceRef="Inspect" targetRef="Extra" />
+    <bpmn:sequenceFlow id="Flow_15" name="Да" sourceRef="Extra" targetRef="Charge" />
+    <bpmn:sequenceFlow id="Flow_16" sourceRef="Charge" targetRef="Merge" />
+    <bpmn:sequenceFlow id="Flow_17" name="Нет" sourceRef="Extra" targetRef="Merge" />
+    <bpmn:sequenceFlow id="Flow_18" sourceRef="Merge" targetRef="Settle" />
+    <bpmn:sequenceFlow id="Flow_19" sourceRef="Settle" targetRef="Close" />
+    <bpmn:sequenceFlow id="Flow_20" sourceRef="Close" targetRef="End" />
+    <bpmn:startEvent id="OnlineStart" name="Получена заявка с сайта или приложения">
+      <bpmn:outgoing>Online_1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="OnlineStart_message" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Register" name="Зарегистрировать выбранное авто, даты и документы клиента">
+      <bpmn:incoming>Online_1</bpmn:incoming>
+      <bpmn:outgoing>Online_2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Quote" name="Рассчитать стоимость и передать заявку на проверку">
+      <bpmn:incoming>Online_2</bpmn:incoming>
+      <bpmn:outgoing>Online_3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Notify" name="Отправить подтверждение брони, стоимость и ссылку на оплату">
+      <bpmn:incoming>Online_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_10</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Online_1" sourceRef="OnlineStart" targetRef="Register" />
+    <bpmn:sequenceFlow id="Online_2" sourceRef="Register" targetRef="Quote" />
+    <bpmn:sequenceFlow id="Online_3" sourceRef="Quote" targetRef="Docs" />
+    <bpmn:sequenceFlow id="Online_4" sourceRef="Contract" targetRef="Notify" />
+    <bpmn:textAnnotation id="OnlineNote">
+      <bpmn:text>Клиент на сайте или в приложении: выбирает автомобиль и даты, указывает контакты, загружает документы и отправляет заявку. Оплата — онлайн по ссылке или при получении.</bpmn:text>
+    </bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram">
+    <bpmndi:BPMNPlane id="Plane" bpmnElement="Collaboration">
+      <bpmndi:BPMNShape id="Pool_di" bpmnElement="Pool" isHorizontal="true">
+        <dc:Bounds x="60" y="90" width="2680" height="1140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Technician_di" bpmnElement="Technician" isHorizontal="true">
+        <dc:Bounds x="90" y="970" width="2650" height="260" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Cashier_di" bpmnElement="Cashier" isHorizontal="true">
+        <dc:Bounds x="90" y="760" width="2650" height="210" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Manager_di" bpmnElement="Manager" isHorizontal="true">
+        <dc:Bounds x="90" y="430" width="2650" height="330" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Online_di" bpmnElement="Online" isHorizontal="true">
+        <dc:Bounds x="90" y="90" width="2650" height="340" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start">
+        <dc:Bounds x="140" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="105" y="578" width="106" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Request_di" bpmnElement="Request">
+        <dc:Bounds x="220" y="510" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Docs_di" bpmnElement="Docs">
+        <dc:Bounds x="400" y="510" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Valid_di" bpmnElement="Valid" isMarkerVisible="true">
+        <dc:Bounds x="580" y="525" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="545" y="480" width="120" height="38" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Stock_di" bpmnElement="Stock">
+        <dc:Bounds x="680" y="510" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Available_di" bpmnElement="Available" isMarkerVisible="true">
+        <dc:Bounds x="860" y="525" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="825" y="480" width="120" height="38" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Contract_di" bpmnElement="Contract">
+        <dc:Bounds x="970" y="510" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Reject_di" bpmnElement="Reject">
+        <dc:Bounds x="680" y="660" width="130" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Rejected_di" bpmnElement="Rejected">
+        <dc:Bounds x="870" y="677" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="835" y="723" width="106" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Payment_di" bpmnElement="Payment">
+        <dc:Bounds x="1140" y="810" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Issue_di" bpmnElement="Issue">
+        <dc:Bounds x="1320" y="1060" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Return_di" bpmnElement="Return">
+        <dc:Bounds x="1500" y="1060" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Inspect_di" bpmnElement="Inspect">
+        <dc:Bounds x="1680" y="1060" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Extra_di" bpmnElement="Extra" isMarkerVisible="true">
+        <dc:Bounds x="1860" y="1075" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1825" y="1135" width="120" height="38" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Charge_di" bpmnElement="Charge">
+        <dc:Bounds x="1980" y="810" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Merge_di" bpmnElement="Merge" isMarkerVisible="true">
+        <dc:Bounds x="2170" y="825" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Settle_di" bpmnElement="Settle">
+        <dc:Bounds x="2280" y="810" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Close_di" bpmnElement="Close">
+        <dc:Bounds x="2460" y="510" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_di" bpmnElement="End">
+        <dc:Bounds x="2650" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2615" y="578" width="106" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineStart_di" bpmnElement="OnlineStart">
+        <dc:Bounds x="140" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="100" y="220" width="120" height="65" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Register_di" bpmnElement="Register">
+        <dc:Bounds x="220" y="150" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Quote_di" bpmnElement="Quote">
+        <dc:Bounds x="400" y="150" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Notify_di" bpmnElement="Notify">
+        <dc:Bounds x="965" y="150" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineNote_di" bpmnElement="OnlineNote">
+        <dc:Bounds x="550" y="285" width="350" height="125" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="176" y="550" />
+        <di:waypoint x="220" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="350" y="550" />
+        <di:waypoint x="400" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="530" y="550" />
+        <di:waypoint x="580" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="630" y="550" />
+        <di:waypoint x="680" y="550" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="641" y="527" width="25" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="605" y="575" />
+        <di:waypoint x="605" y="695" />
+        <di:waypoint x="680" y="695" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="611" y="618" width="30" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="810" y="550" />
+        <di:waypoint x="860" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="910" y="550" />
+        <di:waypoint x="970" y="550" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="929" y="527" width="25" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="885" y="575" />
+        <di:waypoint x="885" y="625" />
+        <di:waypoint x="745" y="625" />
+        <di:waypoint x="745" y="660" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="816" y="603" width="30" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="810" y="695" />
+        <di:waypoint x="870" y="695" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10_di" bpmnElement="Flow_10">
+        <di:waypoint x="1105" y="190" />
+        <di:waypoint x="1205" y="190" />
+        <di:waypoint x="1205" y="810" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11_di" bpmnElement="Flow_11">
+        <di:waypoint x="1270" y="850" />
+        <di:waypoint x="1385" y="850" />
+        <di:waypoint x="1385" y="1060" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_12_di" bpmnElement="Flow_12">
+        <di:waypoint x="1450" y="1100" />
+        <di:waypoint x="1500" y="1100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13_di" bpmnElement="Flow_13">
+        <di:waypoint x="1630" y="1100" />
+        <di:waypoint x="1680" y="1100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14_di" bpmnElement="Flow_14">
+        <di:waypoint x="1810" y="1100" />
+        <di:waypoint x="1860" y="1100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15_di" bpmnElement="Flow_15">
+        <di:waypoint x="1885" y="1075" />
+        <di:waypoint x="1885" y="850" />
+        <di:waypoint x="1980" y="850" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1897" y="915" width="25" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16_di" bpmnElement="Flow_16">
+        <di:waypoint x="2110" y="850" />
+        <di:waypoint x="2170" y="850" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17_di" bpmnElement="Flow_17">
+        <di:waypoint x="1910" y="1100" />
+        <di:waypoint x="2195" y="1100" />
+        <di:waypoint x="2195" y="875" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2035" y="1075" width="30" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18_di" bpmnElement="Flow_18">
+        <di:waypoint x="2220" y="850" />
+        <di:waypoint x="2280" y="850" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_19_di" bpmnElement="Flow_19">
+        <di:waypoint x="2410" y="850" />
+        <di:waypoint x="2525" y="850" />
+        <di:waypoint x="2525" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_20_di" bpmnElement="Flow_20">
+        <di:waypoint x="2590" y="550" />
+        <di:waypoint x="2650" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Online_1_di" bpmnElement="Online_1">
+        <di:waypoint x="176" y="190" />
+        <di:waypoint x="220" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Online_2_di" bpmnElement="Online_2">
+        <di:waypoint x="360" y="190" />
+        <di:waypoint x="400" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Online_3_di" bpmnElement="Online_3">
+        <di:waypoint x="470" y="230" />
+        <di:waypoint x="470" y="510" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Online_4_di" bpmnElement="Online_4">
+        <di:waypoint x="1035" y="510" />
+        <di:waypoint x="1035" y="230" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

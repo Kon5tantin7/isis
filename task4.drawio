@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net">
+  <diagram name="ER — Прокат автомобилей">
+    <mxGraphModel dx="1410" dy="1370" grid="1" page="1" pageWidth="1410" pageHeight="1370">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="e0" value="1 — 0..N" edge="1" parent="1" source="client" target="request" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e1" value="1 — 0..N" edge="1" parent="1" source="car" target="request" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" value="1 — 0..N" edge="1" parent="1" source="client" target="doc" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e3" value="1 — 0..1" edge="1" parent="1" source="request" target="contract" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e4" value="1 — 0..N" edge="1" parent="1" source="employee" target="contract" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" value="1 — 0..2" edge="1" parent="1" source="contract" target="act" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" value="1 — 0..N" edge="1" parent="1" source="employee" target="act" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1100" y="810" />
+              <mxPoint x="800" y="810" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="0..1 — 0..N" edge="1" parent="1" source="employee" target="payment" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" value="1 — 0..N" edge="1" parent="1" source="contract" target="payment" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="950" y="695" />
+              <mxPoint x="950" y="980" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e9" value="1 — 0..N" edge="1" parent="1" source="act" target="charge" style="edgeStyle=orthogonalEdgeStyle;rounded=0;endArrow=none;startArrow=none;strokeColor=#526779;fontSize=15;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="client" value="КЛИЕНТ&#10;&#10;PK  id_клиента&#10;ФИО&#10;Телефон&#10;Email" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="60" y="110" width="330" height="156" />
+        </mxCell>
+        <mxCell id="request" value="ЗАЯВКА / БРОНИРОВАНИЕ&#10;&#10;PK  id_заявки&#10;FK  id_клиента&#10;FK  id_автомобиля&#10;Канал: офис / сайт / приложение&#10;Начало и конец проката&#10;Расчётная стоимость&#10;Статус; причина отказа&#10;Результат проверки допуска" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="540" y="110" width="330" height="260" />
+        </mxCell>
+        <mxCell id="car" value="АВТОМОБИЛЬ&#10;&#10;PK  id_автомобиля&#10;UK  VIN; госномер&#10;Марка; модель&#10;Тариф за сутки&#10;Статус автомобиля" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="1020" y="110" width="330" height="182" />
+        </mxCell>
+        <mxCell id="doc" value="ДОКУМЕНТ КЛИЕНТА&#10;&#10;PK  id_документа&#10;FK  id_клиента&#10;Тип: паспорт / водительское&#10;Серия; номер&#10;Дата выдачи; срок действия" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="60" y="500" width="330" height="182" />
+        </mxCell>
+        <mxCell id="contract" value="ДОГОВОР ПРОКАТА&#10;&#10;PK  id_договора&#10;FK, UK  id_заявки&#10;FK  id_менеджера → Сотрудник&#10;Номер; дата подписания&#10;Согласованная стоимость&#10;Сумма залога; условия доплат&#10;Статус; дата закрытия" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="540" y="500" width="330" height="234" />
+        </mxCell>
+        <mxCell id="employee" value="СОТРУДНИК&#10;&#10;PK  id_сотрудника&#10;ФИО&#10;Роль: менеджер / кассир /&#10;сотрудник выдачи и приёма" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="1020" y="500" width="330" height="156" />
+        </mxCell>
+        <mxCell id="charge" value="ДОПЛАТА&#10;&#10;PK  id_доплаты&#10;FK  id_акта → Акт возврата&#10;Основание: топливо / срок / ущерб&#10;Описание&#10;Сумма" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="60" y="900" width="330" height="182" />
+        </mxCell>
+        <mxCell id="act" value="АКТ ВЫДАЧИ / ВОЗВРАТА&#10;&#10;PK  id_акта&#10;FK  id_договора&#10;FK  id_сотрудника&#10;Тип: выдача / возврат&#10;Дата и время; пробег&#10;Уровень топлива; состояние&#10;UK  (id_договора, тип)" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="540" y="900" width="330" height="234" />
+        </mxCell>
+        <mxCell id="payment" value="ПЛАТЁЖНАЯ ОПЕРАЦИЯ&#10;&#10;PK  id_операции&#10;FK  id_договора&#10;FK? id_кассира → Сотрудник&#10;Тип: аренда / залог / доплата /&#10;возврат залога&#10;Сумма; дата; статус&#10;Способ: онлайн / в офисе" vertex="1" parent="1" style="rounded=0;whiteSpace=wrap;html=0;align=left;verticalAlign=top;spacing=12;fontSize=15;fillColor=#e9eff5;strokeColor=#526779;">
+          <mxGeometry as="geometry" x="1020" y="900" width="330" height="234" />
+        </mxCell>
+        <mxCell id="n0" value="PK — первичный ключ; FK — внешний ключ; UK — уникальность; ? — допускается NULL." vertex="1" parent="1" style="text;html=0;align=left;fontSize=15;">
+          <mxGeometry as="geometry" x="60" y="1184" width="1300" height="26" />
+        </mxCell>
+        <mxCell id="n1" value="1 — ровно один; 0..1 — не более одного; 0..N — любое количество; 0..2 — до двух актов." vertex="1" parent="1" style="text;html=0;align=left;fontSize=15;">
+          <mxGeometry as="geometry" x="60" y="1210" width="1300" height="26" />
+        </mxCell>
+        <mxCell id="n2" value="У одного договора не более одного акта каждого типа. Доплаты относятся только к акту возврата." vertex="1" parent="1" style="text;html=0;align=left;fontSize=15;">
+          <mxGeometry as="geometry" x="60" y="1236" width="1300" height="26" />
+        </mxCell>
+        <mxCell id="n3" value="Клиент и автомобиль договора определяются через заявку. Онлайн-платёж может не иметь кассира." vertex="1" parent="1" style="text;html=0;align=left;fontSize=15;">
+          <mxGeometry as="geometry" x="60" y="1262" width="1300" height="26" />
+        </mxCell>
+        <mxCell id="n4" value="Периоды подтверждённых бронирований одного автомобиля не должны пересекаться." vertex="1" parent="1" style="text;html=0;align=left;fontSize=15;">
+          <mxGeometry as="geometry" x="60" y="1288" width="1300" height="26" />
+        </mxCell>
+        <mxCell id="n5" value="Атрибуты и ограничения — проектные решения на основе BPMN; отдельная сущность «сайт» не требуется." vertex="1" parent="1" style="text;html=0;align=left;fontSize=15;">
+          <mxGeometry as="geometry" x="60" y="1314" width="1300" height="26" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
